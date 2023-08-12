@@ -8,16 +8,16 @@ calendar_high = 150
 
 box_len = 200 / 7
 box_high = calendar_high/7
+
+started_y_cord = 250
 #set the turtle to be origin from the left side of the window instead of the center
 turtle.screensize(900,550)
 turtle.penup()
-turtle.goto(-430, 225)
+turtle.goto(-430, started_y_cord)
 turtle.speed(0)
 
-# y_cord = 230
-
 def set_turtle_to_row(row_num):
-    y_cord = 225 - ((calendar_high + gap) * row_num)
+    y_cord = started_y_cord - ((calendar_high + gap) * row_num)
     turtle.penup()
     if( row_num == 1) :
         turtle.goto(-430, y_cord)
@@ -29,7 +29,7 @@ def set_turtle_to_row(row_num):
 
 
 def pre_turtle(row, col) :
-    y_cord = 225 - ((calendar_high + gap) * row)
+    y_cord = started_y_cord - ((calendar_high + gap) * row)
     x = -430
     if col > 1 :
         x = -430 + ((calendar_width + gap) * (col -1))
@@ -146,9 +146,6 @@ def draw_cal(row, col, month, first_day) :
         for col in range(1, 8) :
             
             #logic when to start count the day
-            # day += 1
-            print("frist day : ", first_day, " Day : ", day , " col : ", col)
-
             if day == 0 :
                 if col == first_day :
                     day += 1
@@ -160,7 +157,6 @@ def draw_cal(row, col, month, first_day) :
 
             if (first_day > 7) :
                 first_day = 1
-            #end of logic
             
             if row == 6 :
                 if month == 4 or month == 7 or month == 12 :
@@ -179,10 +175,9 @@ def draw_cal(row, col, month, first_day) :
 
 month = 0
 first_day_of_the_month = 1
+
 #calendar grid row loop
 for row in range(0, 3) :
-
-    
     set_turtle_to_row(row)
 
     #calendar grid column loop
@@ -194,7 +189,6 @@ for row in range(0, 3) :
 
         first_day_of_the_month= draw_cal(row, col, month, first_day_of_the_month)
     
-
 turtle.done()
 
 
