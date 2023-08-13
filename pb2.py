@@ -90,10 +90,12 @@ def draw_cal_week_head() :
     turtle.penup()
     turtle.goto(turtle.xcor(), turtle.ycor() - box_high)
 
-    for wkday in weekdays :
-        draw_cal_box(wkday, month="")
+    wkday = 0
+    while wkday < len(weekdays) :
+        draw_cal_box(weekdays[wkday], month="")
         turtle.penup()
         turtle.forward(box_len)
+        wkday += 1
         
 
 month_31 = [1,3,5,7,8,10,12]
@@ -130,21 +132,21 @@ def should_count_first_day(day, month) :
                 return True
     return False
 
-def draw_cal(row, col, month, first_day) :
+def draw_cal(cal_row, cal_col, month, first_day) :
     day = 0
     x = -430
-    if col > 1 :
-        x = -430 + ((calendar_width + gap) * (col -1))
+    if cal_col > 1 :
+        x = -430 + ((calendar_width + gap) * (cal_col -1))
 
-
-    for row in range(1, 7) :
+    row = 1
+    while row < 7 :
 
         turtle.goto(x, turtle.ycor() - box_high)
         turtle.pendown()
 
-
-        for col in range(1, 8) :
-            
+        # col = 1
+        col = 1
+        while col < 8 :
             #logic when to start count the day
             if day == 0 :
                 if col == first_day :
@@ -164,12 +166,13 @@ def draw_cal(row, col, month, first_day) :
                     turtle.penup()
                     turtle.forward(box_len)
                 else :
-                    continue
+                    col += 1
             else :
                 draw_cal_box(day, month)
                 turtle.penup()
                 turtle.forward(box_len)
-
+            col += 1
+        row += 1
 
     return first_day
 
@@ -177,17 +180,21 @@ month = 0
 first_day_of_the_month = 1
 
 #calendar grid row loop
-for row in range(0, 3) :
+row = 0
+while row < 3 :
     set_turtle_to_row(row)
 
     #calendar grid column loop
-    for col in range(1, 5):
+    col = 1
+    while col < 5:
         month += 1
         pre_turtle(row, col)
         draw_cal_head(month)
         draw_cal_week_head()
 
         first_day_of_the_month= draw_cal(row, col, month, first_day_of_the_month)
+        col += 1
+    row += 1
     
 turtle.done()
 
