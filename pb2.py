@@ -15,6 +15,7 @@ turtle.screensize(900,550)
 turtle.penup()
 turtle.goto(-430, started_y_cord)
 turtle.speed(0)
+turtle.tracer(0)
 
 def set_turtle_to_row(row_num):
     y_cord = started_y_cord - ((calendar_high + gap) * row_num)
@@ -86,7 +87,7 @@ def draw_cal_box(day, month):
 
 def draw_cal_week_head() :
 
-    weekdays = ["Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"]
+    weekdays = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"]
     turtle.penup()
     turtle.goto(turtle.xcor(), turtle.ycor() - box_high)
 
@@ -144,7 +145,6 @@ def draw_cal(cal_row, cal_col, month, first_day) :
         turtle.goto(x, turtle.ycor() - box_high)
         turtle.pendown()
 
-        # col = 1
         col = 1
         while col < 8 :
             #logic when to start count the day
@@ -195,7 +195,7 @@ while row < 3 :
         first_day_of_the_month= draw_cal(row, col, month, first_day_of_the_month)
         col += 1
     row += 1
-    
+
 turtle.done()
 
 
